@@ -1,9 +1,9 @@
 script_author('Budanov for Banderas Family')
 script_name("adHelper")
-local script__version = '1.21'
+local script__version = '1.2'
 script_version(script__version)
 local keys = require "vkeys"
-script_description('РџС–РґСЂР°С…СѓРЅРѕРє Рє-С‚С– РѕРіРѕР»РѕС€РµРЅСЊ РІ Р—РњР† С‚Р° С–РЅРІР°Р№С‚С–РІ')
+script_description('Підрахунок к-ті оголошень в ЗМІ та інвайтів')
 require("lib.moonloader")
 local imgui = require 'imgui'
 local encoding = require 'encoding'
@@ -76,7 +76,7 @@ local flag666 = true
 local posnoti2Y = 270
 require 'sampfuncs' 
 local password = "4308"
-local dsandtg = '/fam Р”РѕР±Р°РІР»СЏР№С‚РµСЃСЊ РІ РґСЃ С„Р°РјРё wmhan' 
+local dsandtg = '/fam Добавляйтесь в дс фами wmhan' 
 local label = 1
 local sampev = require 'lib.samp.events' 
 local StepAD = 0
@@ -111,7 +111,7 @@ local minutes = 0
 local minutescounter = 0
 local seconds = 0
 local state_w = false
-local info = u8"Р’РІРµРґС–С‚СЊ РїР°СЂРѕР»СЊ"
+local info = u8"Введіть пароль"
 local info2 = 5
 local elapsedSeconds = 0
 local elapsedSeconds1 = 0
@@ -252,15 +252,17 @@ function main()
     if not isSampLoaded() and not isSampfuncsLoaded() then return end 
     while not isSampAvailable() do wait(0) end
 	
+	autoupdate("https://raw.githubusercontent.com/Bogdan4308/555/main/json.json?token=GHSAT0AAAAAACNJH42HDXF6BIBT5ICFRDPGZNRMOUA", '['..string.upper(thisScript().name)..']: ', "https://raw.githubusercontent.com/Bogdan4308/555/main/adHelper.lua?token=GHSAT0AAAAAACNJH42GAS2MSXFVJB5OIFTAZNRMOLQ")
+	
 	sampRegisterChatCommand("adf", cmd_ad)
 	sampRegisterChatCommand("ah", cmd_ah)
 	sampRegisterChatCommand("famuninvite", cmd_kick)
 	imgui.Process = false
 	if label == 1 then
 	   wait(500)
-	   sampAddChatMessage('[AdHelper] CРєСЂРёРїС‚ СѓСЃРїС–С€РЅРѕ Р·Р°РІР°РЅС‚Р°Р¶РµРЅРѕ', 0x00FA9A) 
+	   sampAddChatMessage('[AdHelper] Cкрипт успішно завантажено', 0x00FA9A) 
 	   sampAddChatMessage('[AdHelper] Budanov for Banderas Family', 0x00FA9A)
-	   sampAddChatMessage('[AdHelper] РљРѕРјР°РЅРґРё - /ah', 0x00FA9A)
+	   sampAddChatMessage('[AdHelper] Команди - /ah', 0x00FA9A)
 		
 	end
 	local timeinfo = os.date("%d")
@@ -354,9 +356,9 @@ function main()
 	
 	while true do
 	 
-	    renderFontDrawText(font, 'Р—РњР†: '.. StepAD, posX, posY, 0xFFFFFFFF, 0x90000000)
+	    renderFontDrawText(font, 'ЗМІ: '.. StepAD, posX, posY, 0xFFFFFFFF, 0x90000000)
 		renderFontDrawText(font, '|', pos2X, pos2Y, 0xFFFFFFFF, 0x90000000)
-		renderFontDrawText(font, 'Р†РЅРІР°Р№С‚Рё: '.. StepInv, pos1X, pos1Y, 0xFFFFFFFF, 0x90000000)
+		renderFontDrawText(font, 'Інвайти: '.. StepInv, pos1X, pos1Y, 0xFFFFFFFF, 0x90000000)
 		if timestateinfo and p == password then
 		    renderFontDrawText(font, hour, posnotiX + postimeX - 10, posnotiY - 50, 0xFFFFFFFF, 0x90000000)
 			renderFontDrawText(font, ":", posnotiX + 70 - 10, posnotiY - 50, 0xFFFFFFFF, 0x90000000)
@@ -511,7 +513,7 @@ function main()
 		if piar1 and active then
 			piarelapsedtime = 0
 			stoptTimer3()
-		    sampSendChat('/ad РЎРµРјСЊСЏ Banderas РёС‰РµС‚ РґСЂСѓР·РµР№')
+		    sampSendChat('/ad Семья Banderas ищет друзей')
 		    wait(200)
 		    EmulateKey(VK_RETURN, true)
 		    wait(200)
@@ -642,13 +644,13 @@ function main()
 		
 		end
 		
-		renderFontDrawText(font, "Р—Рџ: "..formatNumberWithCommas(math.ceil(allSum)).."$", posnoti2X - 75 , posnoti2Y + 20 - testY, 0xFFFFFFFF, 0x90000000)
+		renderFontDrawText(font, "ЗП: "..formatNumberWithCommas(math.ceil(allSum)).."$", posnoti2X - 75 , posnoti2Y + 20 - testY, 0xFFFFFFFF, 0x90000000)
 
 		
 		if state_not1 then
 		    testY = 0
 		    renderFontDrawText(font, "{FFFF00}"..StepNot, posnotiX - 30, posnotiY, 0xFFFFFFFF, 0x90000000)
-			renderFontDrawText(font, "{FFFF00}РљР”:", posnotiX + 10, posnotiY, 0xFFFFFFFF, 0x90000000)
+			renderFontDrawText(font, "{FFFF00}КД:", posnotiX + 10, posnotiY, 0xFFFFFFFF, 0x90000000)
 		    renderFontDrawText(font, "{FFFF00}"..notelapsedtime, posnoti2X - 37, posnoti2Y, 0xFFFFFFFF, 0x90000000)		
 		else
 		    if not checked_piar.v then
@@ -664,7 +666,7 @@ function main()
 		
 		if checked_piar.v then
 		    testY = 0
-		    renderFontDrawText(font, "{228B22}РљР”: "..piarelapsedtime, posnoti2X + 40 , posnoti2Y, 0xFFFFFFFF, 0x90000000)
+		    renderFontDrawText(font, "{228B22}КД: "..piarelapsedtime, posnoti2X + 40 , posnoti2Y, 0xFFFFFFFF, 0x90000000)
 		
 		
 		    
@@ -693,11 +695,11 @@ function main()
 end
 
 function sampev.onServerMessage(color, text)
-    nick, id, input = string.match(text, '([a-zA-Z_]+)%[(%d+)%]:{B9C1B8} СЃР°РјРѕСЃС‚РѕСЏС‚РµР»СЊРЅРѕ РїРѕРєРёРЅСѓР» СЃРµРјСЊСЋ!')
+    nick, id, input = string.match(text, '([a-zA-Z_]+)%[(%d+)%]:{B9C1B8} самостоятельно покинул семью!')
 	if nick then
 	    lua_thread.create(function()
 		wait(100)
-		sampAddChatMessage(nick.."["..id.."] РґРѕР±Р°РІР»РµРЅРёР№ Сѓ С‡РѕСЂРЅРёР№ СЃРїРёСЃРѕРє!", 0xFF0000)
+		sampAddChatMessage(nick.."["..id.."] добавлений у чорний список!", 0xFF0000)
 		end)
 		local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Blacklist.txt', 'r')
 		if file then
@@ -705,27 +707,27 @@ function sampev.onServerMessage(color, text)
             file:close()
 		end
 		fifth_window_state.v = true 
-		text_buffer8.v = (b15..nick..u8"(Р»С–РІ)".."\n")
+		text_buffer8.v = (b15..nick..u8"(лів)".."\n")
 		fifth_window_state.v = false
 		imgui.Process = fifth_window_state.v
 	end
-	nick1, id1, input1 = string.match(text, '([a-zA-Z_]+)%[(%d+)%]:{FFFFFF} РџРѕРїРѕР»РЅРёР» СЃРєР»Р°Рґ СЃРµРјСЊРё РЅР° (.+)')
+	nick1, id1, input1 = string.match(text, '([a-zA-Z_]+)%[(%d+)%]:{FFFFFF} Пополнил склад семьи на (.+)')
 	if nick1 then
 	    local timehs = os.time()
-        local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Р›РѕРіРё\\LogMoney.txt', 'a')
+        local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Логи\\LogMoney.txt', 'a')
 	    if file then
-            file:write(os.date('%x [%X] ', timehs)..nick1.." РїРѕРєР»Р°РІ "..input1, '\n')
+            file:write(os.date('%x [%X] ', timehs)..nick1.." поклав "..input1, '\n')
             file:close()
 	    end
 	
 	end
 	
-	nick2, id2, input2 = string.match(text, '([a-zA-Z_]+)%[(%d+)%]:{FFFFFF} Р’Р·СЏР» (.+) СЃРѕ СЃРєР»Р°РґР° СЃРµРјСЊРё!')
+	nick2, id2, input2 = string.match(text, '([a-zA-Z_]+)%[(%d+)%]:{FFFFFF} Взял (.+) со склада семьи!')
 	if nick2 then
 	    local timehs = os.time()
-        local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Р›РѕРіРё\\LogMoney.txt', 'a')
+        local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Логи\\LogMoney.txt', 'a')
 	    if file then
-            file:write(os.date('%x [%X] ', timehs)..nick2.." РІР·СЏРІ "..input2, '\n')
+            file:write(os.date('%x [%X] ', timehs)..nick2.." взяв "..input2, '\n')
             file:close()
 	    end
 	
@@ -750,17 +752,17 @@ function sampev.onServerMessage(color, text)
 	end
 	
     local nick = sampGetPlayerNickname(select(2, sampGetPlayerIdByCharHandle(playerPed))) 
-    if text:find("РћР±СЉСЏРІР»РµРЅРёРµ: (%D+)Рµ(%D+)СЏ (%D+)".. nick) then
+    if text:find("Объявление: (%D+)е(%D+)я (%D+)".. nick) then
 	   StepAD=StepAD + 1
 	   lua_thread.create(function()
 	   wait(100)
-       sampAddChatMessage('[AdHelper] РљС–Р»СЊРєС–СЃС‚СЊ РѕРіРѕР»РѕС€РµРЅСЊ: '.. StepAD, colors)
-	   print('РћРіРѕР»РѕС€РµРЅРЅСЏ: '.. StepAD)
+       sampAddChatMessage('[AdHelper] Кількість оголошень: '.. StepAD, colors)
+	   print('Оголошення: '.. StepAD)
 	   end)
 	   local timeh = os.time()
-       local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Р›РѕРіРё\\Log.txt', 'a')
+       local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Логи\\Log.txt', 'a')
 	   if file then
-            file:write(os.date('[%H:%M:%S] ', timeh)..'РћРіРѕР»РѕС€РµРЅРЅСЏ: '.. StepAD, ' Р†РЅРІР°Р№С‚Рё: '.. StepInv, '\n')
+            file:write(os.date('[%H:%M:%S] ', timeh)..'Оголошення: '.. StepAD, ' Інвайти: '.. StepInv, '\n')
             file:close()
 	    end
 		
@@ -786,20 +788,20 @@ function sampev.onServerMessage(color, text)
 	end 
     	
      
-    if text:find("РїСЂРёРЅСЏР» РІР°С€Рµ РїСЂРµРґР»РѕР¶РµРЅРёРµ РІСЃС‚СѓРїРёС‚СЊ РІ СЃРµРјСЊСЋ!") then
+    if text:find("принял ваше предложение вступить в семью!") then
        StepInv= StepInv + 1
 	   lua_thread.create(function()
 	   wait(100)
-	   sampAddChatMessage('[AdHelper] РљС–Р»СЊРєС–СЃС‚СЊ С–РЅРІР°Р№С‚С–РІ: '.. StepInv, colors1)
+	   sampAddChatMessage('[AdHelper] Кількість інвайтів: '.. StepInv, colors1)
 	   sampSendChat(u8:decode(dsandtg))
 	   wait(200)
-	   sampSendChat("Р’С–С‚Р°С”РјРѕ Сѓ СЃС–Рј'С—")
-	   print('Р†РЅРІР°Р№С‚Рё: '.. StepInv)
+	   sampSendChat("Вітаємо у сім'ї")
+	   print('Інвайти: '.. StepInv)
 	   end)
 	   local timeh = os.time()
-       local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Р›РѕРіРё\\Log.txt', 'a')
+       local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Логи\\Log.txt', 'a')
 	   if file then
-            file:write(os.date('[%H:%M:%S] ', timeh)..'РћРіРѕР»РѕС€РµРЅРЅСЏ: '.. StepAD, ' Р†РЅРІР°Р№С‚Рё: '.. StepInv, '\n')
+            file:write(os.date('[%H:%M:%S] ', timeh)..'Оголошення: '.. StepAD, ' Інвайти: '.. StepInv, '\n')
             file:close()
 	   end
 	    local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Logs.txt', 'w')
@@ -811,7 +813,7 @@ function sampev.onServerMessage(color, text)
 	   
     end 
      
-    if text:find("РІСЃС‚СѓРїРёС‚СЊ РІ РІР°С€Сѓ СЃРµРјСЊСЋ!") then
+    if text:find("вступить в вашу семью!") then
 	    lua_thread.create(function()
 		wait(100)
 	    sampSendChat('/b /acceptfam')
@@ -825,7 +827,7 @@ function sampev.onServerMessage(color, text)
             local res, id = sampGetPlayerIdByCharHandle(v)
             if res then
                 if string.find(b5, sampGetPlayerNickname(id)) then
-			        sampAddChatMessage("[AdHelper] РЈР’РђР“Рђ! "..sampGetPlayerNickname(id).." Р·РЅР°С…РѕРґРёС‚СЊСЃСЏ Сѓ Р§РЎ!", 0xFF0000)
+			        sampAddChatMessage("[AdHelper] УВАГА! "..sampGetPlayerNickname(id).." знаходиться у ЧС!", 0xFF0000)
 			    end
             end
         end
@@ -838,7 +840,7 @@ function sampev.onServerMessage(color, text)
 	    invstat = true
 	end
 	
-	if text:find("Р’С–С‚Р°С”РјРѕ Сѓ СЃС–Рј'С—") then
+	if text:find("Вітаємо у сім'ї") then
 	    local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\password.txt', 'w')
 	    if file then
 			z9 = file:read()
@@ -850,7 +852,7 @@ function sampev.onServerMessage(color, text)
 		        lua_thread.create(function()
 		        StepInv = StepInv + 1
 			    wait(200)
-		        sampAddChatMessage('[AdHelper] РљС–Р»СЊРєС–СЃС‚СЊ С–РЅРІР°Р№С‚С–РІ: '.. StepInv, colors1)
+		        sampAddChatMessage('[AdHelper] Кількість інвайтів: '.. StepInv, colors1)
 			    end)
 			    local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Logs.txt', 'w')
 	            if file then
@@ -866,7 +868,7 @@ end
 
 
 function cmd_ad(arg)
-    sampSendChat('/ad РЎРµРјСЊСЏ Banderas РёС‰РµС‚ РґСЂСѓР·РµР№')
+    sampSendChat('/ad Семья Banderas ищет друзей')
 	    
 	
 end
@@ -920,8 +922,8 @@ function imgui.OnDrawFrame()
 	if main_window_state.v then
 	    imgui.SetNextWindowPos(imgui.ImVec2(sw/ 2 , sh / 2 ), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 		imgui.SetNextWindowSize(imgui.ImVec2(sw/2, sh/2), imgui.Cond.FirstUseEver)
-		imgui.Begin(u8"[AdHelper] | РџСЂРёРІС–С‚, "..nick.."| Banderas Family", main_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
-		if imgui.Button(u8'РЇ 9 Р РђРќР“',imgui.ImVec2(450, 490)) then
+		imgui.Begin(u8"[AdHelper] | Привіт, "..nick.."| Banderas Family", main_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+		if imgui.Button(u8'Я 9 РАНГ',imgui.ImVec2(450, 490)) then
 		    third_window_state.v = true
 		    main_window_state.v = false
 			if p == password then
@@ -932,7 +934,7 @@ function imgui.OnDrawFrame()
 		end
 		imgui.SetCursorPosX((sw/2)/1.94)
 		imgui.SetCursorPosY((sw/2)/24.5)
-		if imgui.Button(u8'РЇ 7 Р РђРќР“',imgui.ImVec2(450, 490)) then
+		if imgui.Button(u8'Я 7 РАНГ',imgui.ImVec2(450, 490)) then
 		    main_window_state.v = false
 		    fourth_window_state.v = true
 		    local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\password.txt', 'w')
@@ -950,7 +952,7 @@ function imgui.OnDrawFrame()
 	    img = imgui.CreateTextureFromFile(getGameDirectory().."\\moonloader\\AdHelper\\Banderas.jpg")
 	    imgui.SetNextWindowPos(imgui.ImVec2(sw/ 2 , sh / 2 ), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 		imgui.SetNextWindowSize(imgui.ImVec2(sw/5, sh/4), imgui.Cond.FirstUseEver)
-		imgui.Begin(u8"[AdHelper] | РџСЂРёРІС–С‚, "..nick..u8"| РђРІС‚РѕСЂРёР·Р°С†С–СЏ", third_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+		imgui.Begin(u8"[AdHelper] | Привіт, "..nick..u8"| Авторизація", third_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
 		imgui.SetCursorPosX((sw/10)/3.1)
 		imgui.Image(img, imgui.ImVec2(200,140))
 		imgui.SetCursorPosX((sw/10)/3.1)
@@ -960,10 +962,10 @@ function imgui.OnDrawFrame()
 		end
 		imgui.SetCursorPosX((sw/7)/2.8)
 		if info_flag then
-			imgui.TextColored(imgui.ImVec4(1.0, 0.0, 0.0, 1.0 ), u8"Р—Р°Р»РёС€РёР»РѕСЃСЊ СЃРїСЂРѕР±: "..info2)
+			imgui.TextColored(imgui.ImVec4(1.0, 0.0, 0.0, 1.0 ), u8"Залишилось спроб: "..info2)
 	    end
 		imgui.SetCursorPosX((sw/5.7)/2.5)
-		if imgui.Button(u8'РЈРІС–Р№С‚Рё') then
+		if imgui.Button(u8'Увійти') then
 		    if text_buffer1.v == password then
 			    secondary_window_state.v = true
 				third_window_state.v = false
@@ -978,14 +980,14 @@ function imgui.OnDrawFrame()
 				    info_flag = true
 				end
 			    lua_thread.create(function()
-			    info = u8"РџР°СЂРѕР»СЊ РЅРµРІС–СЂРЅРёР№!"
+			    info = u8"Пароль невірний!"
 				warn = warn + 1
 				info2 = 5 - warn
 				if info2 < 0 then
 				    info2 = 0
 				end
 				wait(1000)
-				info = u8"Р’РІРµРґС–С‚СЊ РїР°СЂРѕР»СЊ"
+				info = u8"Введіть пароль"
 				
 				end)
 			 
@@ -1012,9 +1014,9 @@ function imgui.OnDrawFrame()
 	    imgui.Process = secondary_window_state.v
 	    imgui.SetNextWindowPos(imgui.ImVec2(sw/ 2 , sh / 2 ), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 		imgui.SetNextWindowSize(imgui.ImVec2(sw/2, sh/2), imgui.Cond.FirstUseEver)
-	    imgui.Begin(u8"[AdHelper] | РџСЂРёРІС–С‚, "..nick.."| Banderas Family", secondary_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+	    imgui.Begin(u8"[AdHelper] | Привіт, "..nick.."| Banderas Family", secondary_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
 		
-		if imgui.Button(u8"Р›РѕРіРё", imgui.ImVec2(220, 30)) then
+		if imgui.Button(u8"Логи", imgui.ImVec2(220, 30)) then
 		    secondary_window_state.v = false
 		    seventh_window_state.v = true
 			imgui.Process = seventh_window_state.v
@@ -1026,12 +1028,12 @@ function imgui.OnDrawFrame()
 		
 		imgui.Separator()
 		
-		imgui.CenterText(u8"Р†РќР’РђР™РўР")
+		imgui.CenterText(u8"ІНВАЙТИ")
 		
 		imgui.Separator()
 		
 		
-		imgui.Text(u8"РўРµРєСЃС‚ РїС–СЃР»СЏ С–РЅРІР°Р№С‚Сѓ:")
+		imgui.Text(u8"Текст після інвайту:")
 		imgui.PushItemWidth(120)
 		imgui.InputText('', text_buffer)
        	
@@ -1040,13 +1042,13 @@ function imgui.OnDrawFrame()
 		
         end		
     
-		if imgui.Button(u8'Р—Р±РµСЂРµРіС‚Рё') then
+		if imgui.Button(u8'Зберегти') then
 		    local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Ad.txt', 'w')
 			if file then
 			    file:write(text_buffer.v)
 				file:close()
 		    end
-		    sampAddChatMessage('Р—Р±РµСЂРµР¶РµРЅРѕ С‚РµРєСЃС‚: " {FFFFE0}'..u8:decode(text_buffer.v)..' {00FA9A}"',0x00FA9A)
+		    sampAddChatMessage('Збережено текст: " {FFFFE0}'..u8:decode(text_buffer.v)..' {00FA9A}"',0x00FA9A)
 	   
 		end
 		imgui.PushItemWidth(60)
@@ -1055,20 +1057,20 @@ function imgui.OnDrawFrame()
 		
 		imgui.Separator()
 		
-		imgui.Checkbox(u8"РђРІС‚РѕРїС–Р°СЂ", checked_piar)
+		imgui.Checkbox(u8"Автопіар", checked_piar)
 		if checked_piar.v then
 		    
 
-		    imgui.Text(u8"Р—Р°С‚СЂРёРјРєР°:")
+		    imgui.Text(u8"Затримка:")
 		    imgui.PushItemWidth(120)
-		    imgui.SliderInt(u8"С…РІ  ", slider, 0, 30)
-		    if imgui.Button(u8'Р—Р°РїСѓСЃС‚РёС‚Рё') then
+		    imgui.SliderInt(u8"хв  ", slider, 0, 30)
+		    if imgui.Button(u8'Запустити') then
 		        active = not active
 				secondary_window_state.v = not secondary_window_state.v
                 if active then
-	                sampAddChatMessage('[AdHelper] Р РµР¶РёРј Р°РІС‚РѕРїС–Р°СЂСѓ {00ff00}РІРІС–РјРєРЅРµРЅРѕ!', 0x00FA9A)
+	                sampAddChatMessage('[AdHelper] Режим автопіару {00ff00}ввімкнено!', 0x00FA9A)
 			        delay = slider.v*60000
-		            sampSendChat('/ad РЎРµРјСЊСЏ Banderas РёС‰РµС‚ РґСЂСѓР·РµР№')
+		            sampSendChat('/ad Семья Banderas ищет друзей')
 					render_state = false	
 			    end
 			
@@ -1076,7 +1078,7 @@ function imgui.OnDrawFrame()
 		else
 			delay = 0
 			if not render_state then
-			        sampAddChatMessage('[AdHelper] Р РµР¶РёРј Р°РІС‚РѕРїС–Р°СЂСѓ {ff0000}РІРёРјРєРЅРµРЅРѕ!', 0x00FA9A)
+			        sampAddChatMessage('[AdHelper] Режим автопіару {ff0000}вимкнено!', 0x00FA9A)
 				    render_state = true
 					active = false
 			end
@@ -1085,17 +1087,17 @@ function imgui.OnDrawFrame()
 		
 		imgui.Separator()
 		
-		imgui.Checkbox(u8"РЎРїР°РІРЅ С‚СЂР°РЅСЃРїРѕСЂС‚Сѓ", checked_spc)
+		imgui.Checkbox(u8"Спавн транспорту", checked_spc)
 		if checked_spc.v then
 		   
-		    if imgui.Button(u8'Р—Р°СЃРїР°РІРЅРёС‚Рё') then
+		    if imgui.Button(u8'Заспавнити') then
 			    lua_thread.create(function()
 				wait(500)
-				sampSendChat('/fam <3 РЈРІР°РіР°! РЎРїР°РІРЅ С„Р°Рј РєР°СЂС–РІ С‡РµСЂРµР· 1 С…РІ!')
+				sampSendChat('/fam <3 Увага! Спавн фам карів через 1 хв!')
 				wait((30)*1000)
-				sampSendChat('/fam <3 РЈРІР°РіР°! РЎРїР°РІРЅ С„Р°Рј РєР°СЂС–РІ С‡РµСЂРµР· 30 СЃРµРє')
+				sampSendChat('/fam <3 Увага! Спавн фам карів через 30 сек')
 				wait((20)*1000)
-				sampSendChat('/fam <3 РЈРІР°РіР°! РЎРїР°РІРЅ С„Р°Рј РєР°СЂС–РІ С‡РµСЂРµР· 10 СЃРµРє')
+				sampSendChat('/fam <3 Увага! Спавн фам карів через 10 сек')
 				wait((10)*1000)
 				sampSendChat('/famspawn')
 				wait(100)
@@ -1109,7 +1111,7 @@ function imgui.OnDrawFrame()
 		imgui.Separator()
 		imgui.Separator()
 		
-		imgui.Checkbox(u8"РЎРїРѕРІС–С‰РµРЅРЅСЏ", checked_not)
+		imgui.Checkbox(u8"Сповіщення", checked_not)
 		
 		
 		if checked_not.v then
@@ -1120,14 +1122,14 @@ function imgui.OnDrawFrame()
 			end
 		   
 		    imgui.PushItemWidth(250)
-		    imgui.InputText(u8"1 СЂСЏРґРѕРє", text_buffer2)
+		    imgui.InputText(u8"1 рядок", text_buffer2)
 			imgui.PushItemWidth(250)
-			imgui.InputText(u8"2 СЂСЏРґРѕРє ", text_buffer3)
+			imgui.InputText(u8"2 рядок ", text_buffer3)
 			imgui.PushItemWidth(250)
-			imgui.InputText(u8"3 СЂСЏРґРѕРє ", text_buffer4)
+			imgui.InputText(u8"3 рядок ", text_buffer4)
 			
 			
-			if imgui.Button(u8" Р—Р±РµСЂРµРіС‚Рё ") then
+			if imgui.Button(u8" Зберегти ") then
 			    local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\notifications.txt', 'w')
 			    if file then
 			        file:write(text_buffer2.v, "\n")
@@ -1155,7 +1157,7 @@ function imgui.OnDrawFrame()
 			 
 			imgui.SameLine()
 			
-			if imgui.Button(u8"РЎС‚Р°СЂС‚") then
+			if imgui.Button(u8"Старт") then
 			    state_not = true
 				state_noti = true
 		    end
@@ -1163,13 +1165,13 @@ function imgui.OnDrawFrame()
 			    
 		
 		    imgui.SameLine()
-			imgui.Text(u8"Р—Р°С‚СЂРёРјРєР°: ")
+			imgui.Text(u8"Затримка: ")
 			imgui.PushItemWidth(120)
 			
 			imgui.Text(u8"                                 ")
 			imgui.SameLine()
 		
-			imgui.SliderInt(u8"С…РІ", slider1, 1, 60)
+			imgui.SliderInt(u8"хв", slider1, 1, 60)
 			if slider1.v < 1 then
 			    slider1.v = 1
 			
@@ -1188,7 +1190,7 @@ function imgui.OnDrawFrame()
 		
 		imgui.Separator()
 		
-		imgui.Checkbox(u8"Р РѕР·С–РіСЂР°С€", checked_giv)
+		imgui.Checkbox(u8"Розіграш", checked_giv)
 		if checked_giv.v then
 		    checked_not.v = false
 		    local count = sampGetPlayerCount(streamed)
@@ -1202,8 +1204,8 @@ function imgui.OnDrawFrame()
 			
 		    
 			
-		    imgui.InputText(u8'РќР°Р·РІР° РїСЂРёР·Сѓ', text_buffer6)
-			imgui.InputText(u8"ID СѓС‡Р°СЃРЅРёРєР°", text_buffer7)
+		    imgui.InputText(u8'Назва призу', text_buffer6)
+			imgui.InputText(u8"ID учасника", text_buffer7)
             
             if imgui.BeginChild("ChildWindow", imgui.ImVec2(300,120), true) then
 			    if r1 ~= "" then
@@ -1214,16 +1216,16 @@ function imgui.OnDrawFrame()
 			
 			local numberValue = tonumber(text_buffer7.v)
 		
-			if imgui.Button(u8"Р”РѕР±Р°РІРёС‚Рё") then
+			if imgui.Button(u8"Добавити") then
 			    if text_buffer7.v == "" then
-				    sampAddChatMessage("[AdHelper] РџРѕР»СЏ РЅРµ РјРѕР¶СѓС‚СЊ Р±СѓС‚Рё РїСѓСЃС‚РёРјРё", 0xFF0000)
+				    sampAddChatMessage("[AdHelper] Поля не можуть бути пустими", 0xFF0000)
 				else
 				    if numberValue > count then
-				        sampAddChatMessage("[AdHelper] РўР°РєРѕРіРѕ РіСЂР°РІС†СЏ РЅРµ С–СЃРЅСѓС”!", 0xFF0000)
+				        sampAddChatMessage("[AdHelper] Такого гравця не існує!", 0xFF0000)
 				    else
 				        local nick5 = sampGetPlayerNickname(text_buffer7.v)
 						if string.match(r1, nick5) then
-						    sampAddChatMessage("[AdHelper] Р¦РµР№ РіСЂР°РІРµС†СЊ РІР¶Рµ С”", 0xFF0000)
+						    sampAddChatMessage("[AdHelper] Цей гравець вже є", 0xFF0000)
 						else
 			                local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Giv.txt', 'a')
 				            if file then
@@ -1239,7 +1241,7 @@ function imgui.OnDrawFrame()
 			
 			end
 			imgui.SameLine()
-			if imgui.Button(u8"РћС‡РёСЃС‚РёС‚Рё") then
+			if imgui.Button(u8"Очистити") then
 			    local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Giv.txt', 'w')
 				if file then
 				    file:write("")
@@ -1248,9 +1250,9 @@ function imgui.OnDrawFrame()
 			
 			end
 			imgui.SameLine()
-			if imgui.Button(u8"Р РѕР·С–РіСЂР°С‚Рё") then
+			if imgui.Button(u8"Розіграти") then
 				if text_buffer6.v == "" or r1 == "" then
-			        sampAddChatMessage("[AdHelper] Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРІРµРґС–С‚СЊ РЅР°Р·РІСѓ РїСЂРёР·Сѓ Р°Р±Рѕ РґРѕР±Р°РІС‚Рµ С…РѕС‡Р° Р± РґРІРѕС… СѓС‡Р°СЃРЅРёРєС–РІ!", 0xFF0000)
+			        sampAddChatMessage("[AdHelper] Будь ласка, введіть назву призу або добавте хоча б двох учасників!", 0xFF0000)
 		        else
 				    local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Giv.txt', 'r')
 					if file then
@@ -1263,13 +1265,13 @@ function imgui.OnDrawFrame()
                         local randomValue = lines[randomIndex]
 						lua_thread.create(function()
 						    wait(1000)
-							sampSendChat("/fam <3 РЈРІР°РіР°! Р РµР·СѓР»СЊС‚Р°С‚ СЂРѕР·С–РіСЂР°С€Сѓ РЅР° ' "..u8:decode(text_buffer6.v).." ' С‡РµСЂРµР· 15 СЃРµРє ")
+							sampSendChat("/fam <3 Увага! Результат розіграшу на ' "..u8:decode(text_buffer6.v).." ' через 15 сек ")
 							wait(5000)
-							sampSendChat("/fam <3 РЈРІР°РіР°! Р РµР·СѓР»СЊС‚Р°С‚ СЂРѕР·С–РіСЂР°С€Сѓ РЅР° ' "..u8:decode(text_buffer6.v).." ' С‡РµСЂРµР· 10 СЃРµРє ")
+							sampSendChat("/fam <3 Увага! Результат розіграшу на ' "..u8:decode(text_buffer6.v).." ' через 10 сек ")
 							wait(5000)
-							sampSendChat("/fam <3 РЈРІР°РіР°! Р РµР·СѓР»СЊС‚Р°С‚ СЂРѕР·С–РіСЂР°С€Сѓ РЅР° ' "..u8:decode(text_buffer6.v).." ' С‡РµСЂРµР· 5 СЃРµРє ")
+							sampSendChat("/fam <3 Увага! Результат розіграшу на ' "..u8:decode(text_buffer6.v).." ' через 5 сек ")
 							wait(5500)
-					        sampSendChat("/fam <3 РЈ СЂРѕР·С–РіСЂР°С€С– РЅР° ' "..u8:decode(text_buffer6.v).." ' РїРµСЂРµРјС–Рі "..randomValue)
+					        sampSendChat("/fam <3 У розіграші на ' "..u8:decode(text_buffer6.v).." ' переміг "..randomValue)
 					    end)
 					end
 				    
@@ -1287,40 +1289,40 @@ function imgui.OnDrawFrame()
 		imgui.Separator()
 		imgui.Separator()
 		
-		imgui.CenterText(u8"РЎРўРђРўРРЎРўРРљРђ")
+		imgui.CenterText(u8"СТАТИСТИКА")
 		imgui.Separator()
 		
-		imgui.Text(u8"Р’РёС‚СЂР°С‡РµРЅРѕ РЅР° РѕРіРѕР»РѕС€РµРЅРЅСЏ: "..Sum.."$")
-		imgui.Text(u8"Р§Р°СЃ РІ РіСЂС–: "..hour..":"..minutes..":"..seconds)
+		imgui.Text(u8"Витрачено на оголошення: "..Sum.."$")
+		imgui.Text(u8"Час в грі: "..hour..":"..minutes..":"..seconds)
 		
 		imgui.Separator()
-		imgui.CenterText(u8"Р—РђР РћР‘Р›Р•РќРћ")
+		imgui.CenterText(u8"ЗАРОБЛЕНО")
 		imgui.Separator()
 		
-		imgui.Text(u8"Р—Р°СЂРѕР±Р»РµРЅРѕ Р· РѕРіРѕР»РѕС€РµРЅСЊ: "..Earn.."$")
+		imgui.Text(u8"Зароблено з оголошень: "..Earn.."$")
 		imgui.SameLine()
-		imgui.Text(u8"Р—Р°СЂРѕР±Р»РµРЅРѕ Р· С–РЅРІР°Р№С‚С–РІ: "..InvSum.."$")
-		imgui.Text(u8"Р—Р°СЂРѕР±Р»РµРЅРѕ Р·Р° РіРѕРґРёРЅРё: "..math.ceil(timeSum).."$")
+		imgui.Text(u8"Зароблено з інвайтів: "..InvSum.."$")
+		imgui.Text(u8"Зароблено за години: "..math.ceil(timeSum).."$")
 		imgui.SameLine()
-		imgui.Text(u8"Р—Р°СЂРѕР±Р»РµРЅРѕ РІСЃСЊРѕРіРѕ: "..formatNumberWithCommas(math.ceil(allSum)).."$")
+		imgui.Text(u8"Зароблено всього: "..formatNumberWithCommas(math.ceil(allSum)).."$")
 		
 		 
 		
 		imgui.Separator()
-		if imgui.Button(u8"Р’С–РґРєСЂРёС‚Рё С‚Р°Р±Р»РёС†СЋ Р—Рџ") then
+		if imgui.Button(u8"Відкрити таблицю ЗП") then
 		    os.execute('start www.docs.google.com/spreadsheets/d/13vJYyxZAMmR5dlbMRNa3Hv7ckR8aYoJfIBOZJdA1NVY/edit?usp=sharing')
 		end
 		
 		imgui.SameLine()
 	   
-		if imgui.Button(u8"Р’С–РґРєСЂРёС‚Рё С‚Р°Р±Р»РёС†СЋ СЂР°РЅРіРё") then
+		if imgui.Button(u8"Відкрити таблицю ранги") then
 		     os.execute('start www.docs.google.com/spreadsheets/d/1_fENCFvm71cAx5CD2pKjaCEjCxLLmh4bV8oJYOK_VOI/edit#gid=0')
 		end
 		
 		imgui.SameLine()
 		
 
-		if imgui.Button(u8"РћР±РЅСѓР»РёС‚Рё СЂР°С…СѓРЅРѕРє") then
+		if imgui.Button(u8"Обнулити рахунок") then
 		    StepAD = 0
 	        StepInv = 0
             local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Logs.txt', 'w')
@@ -1331,15 +1333,15 @@ function imgui.OnDrawFrame()
 			end
         
 	        lua_thread.create(function()
-	        sampAddChatMessage('[AdHelper] Р—Р°С‡РµРєР°Р№С‚Рµ, Р±СѓРґСЊ Р»Р°СЃРєР°...', 0x00FA9A)
+	        sampAddChatMessage('[AdHelper] Зачекайте, будь ласка...', 0x00FA9A)
 		    wait(1500)
-	        sampAddChatMessage('[AdHelper] Р›РѕРіРё СѓСЃРїС–С€РЅРѕ РѕС‡РёС‰РµРЅРѕ!', 0x00FA9A)
+	        sampAddChatMessage('[AdHelper] Логи успішно очищено!', 0x00FA9A)
 	        end)
 		
 		end
 		
 		imgui.SameLine()
-		if imgui.Button(u8"РћР±РЅСѓР»РёС‚Рё С‡Р°СЃ") then
+		if imgui.Button(u8"Обнулити час") then
 			minutes = 0
 			hour = 0
 			startTimer()
@@ -1356,13 +1358,13 @@ function imgui.OnDrawFrame()
 		
 		imgui.SameLine()
 
-		if imgui.Button(u8"Р§РЎ") then
+		if imgui.Button(u8"ЧС") then
 		    fifth_window_state.v = true
 			imgui.Process = fifth_window_state.v
 		end
 		
 	
-		imgui.Checkbox(u8"Р§Р°СЃ РЅР° РµРєСЂР°РЅС–", checked_time)
+		imgui.Checkbox(u8"Час на екрані", checked_time)
 		if checked_time.v then
 		    timestateinfo = true
 			
@@ -1373,7 +1375,7 @@ function imgui.OnDrawFrame()
 		
 		end
 	
-		imgui.Checkbox(u8"РђРІС‚РѕРѕС‡РёС‰РµРЅРЅСЏ Р»РѕРіС–РІ", checked_clean)
+		imgui.Checkbox(u8"Автоочищення логів", checked_clean)
 		if checked_clean.v then
             local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\clean1.txt', 'w')
 	        if file then
@@ -1395,7 +1397,7 @@ function imgui.OnDrawFrame()
 	
 		imgui.Text("                                                                                                                                                                                                                                           ")
 		imgui.SameLine()
-		if imgui.Button(u8'Р’РёР№С‚Рё') then
+		if imgui.Button(u8'Вийти') then
 			secondary_window_state.v = false
 			main_window_state.v = true
 		    local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\password.txt', 'w')
@@ -1409,7 +1411,7 @@ function imgui.OnDrawFrame()
 		
 		imgui.Separator()
 		
-		imgui.Text("by Budanov | Version "..script__version..u8" | РЎР»Р°РІР° РЈРєСЂР°С—РЅС–!")
+		imgui.Text("by Budanov | Version "..script__version..u8" | Слава Україні!")
 		
 		
 		
@@ -1423,13 +1425,13 @@ function imgui.OnDrawFrame()
 		imgui.Proccess = seventh_window_state.v
 	    imgui.SetNextWindowPos(imgui.ImVec2(sw/ 2 , sh / 2 ), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 		imgui.SetNextWindowSize(imgui.ImVec2(sw/2, sh/2), imgui.Cond.FirstUseEver)
-	    imgui.Begin(u8"[AdHelper] | Р›РѕРіРё | Banderas Family", seventh_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
-		if imgui.Button(u8"РћСЃРЅРѕРІРЅР°", imgui.ImVec2(220, 30)) then
+	    imgui.Begin(u8"[AdHelper] | Логи | Banderas Family", seventh_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+		if imgui.Button(u8"Основна", imgui.ImVec2(220, 30)) then
 		    seventh_window_state.v = false
 			secondary_window_state.v = true
 		
 		end
-		local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Р›РѕРіРё\\LogMoney.txt', 'r')
+		local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Логи\\LogMoney.txt', 'r')
 	    if file then
 			logs = file:read("*all")
 		    file:close()
@@ -1447,10 +1449,10 @@ function imgui.OnDrawFrame()
 	if fourth_window_state.v then
 	    imgui.SetNextWindowPos(imgui.ImVec2(sw/ 2 , sh / 2 ), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 		imgui.SetNextWindowSize(imgui.ImVec2(sw/2, sh/2), imgui.Cond.FirstUseEver)
-	    imgui.Begin(u8"[AdHelper] | РџСЂРёРІС–С‚, "..nick.."| Banderas Family", fourth_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+	    imgui.Begin(u8"[AdHelper] | Привіт, "..nick.."| Banderas Family", fourth_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
 		
 		imgui.Separator()
-		imgui.CenterText(u8"РЎРўРђРўРРЎРўРРљРђ")
+		imgui.CenterText(u8"СТАТИСТИКА")
 		
 		imgui.Separator()
 		
@@ -1460,18 +1462,18 @@ function imgui.OnDrawFrame()
 		
 		InvSum = StepInv*500000
 		
-		imgui.Text(u8"Р’РёС‚СЂР°С‡РµРЅРѕ РЅР° РѕРіРѕР»РѕС€РµРЅРЅСЏ: "..Sum.."$")
-		imgui.Text(u8"Р—Р°СЂРѕР±Р»РµРЅРѕ Р· РѕРіРѕР»РѕС€РµРЅСЊ: "..Earn.."$")
-		imgui.Text(u8"Р—Р°СЂРѕР±Р»РµРЅРѕ Р· С–РЅРІР°Р№С‚С–РІ: "..InvSum.."$")
+		imgui.Text(u8"Витрачено на оголошення: "..Sum.."$")
+		imgui.Text(u8"Зароблено з оголошень: "..Earn.."$")
+		imgui.Text(u8"Зароблено з інвайтів: "..InvSum.."$")
 		
 		imgui.Separator()
 		
-		if imgui.Button(u8"Р’С–РґРєСЂРёС‚Рё С‚Р°Р±Р»РёС†СЋ") then
+		if imgui.Button(u8"Відкрити таблицю") then
 		    os.execute('start www.docs.google.com/spreadsheets/d/1ObMLqx2UIyuvYlQToQNsSPnuf8eRu2Lwn00gutIKtJU/edit#gid=0')
 		
 		end
 		
-		if imgui.Button(u8"РћР±РЅСѓР»РёС‚Рё СЂР°С…СѓРЅРѕРє") then
+		if imgui.Button(u8"Обнулити рахунок") then
 		    StepAD = 0
 	        StepInv = 0
             local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\Logs.txt', 'w')
@@ -1482,13 +1484,13 @@ function imgui.OnDrawFrame()
 			end
         
 	        lua_thread.create(function()
-	        sampAddChatMessage('[AdHelper] Р—Р°С‡РµРєР°Р№С‚Рµ, Р±СѓРґСЊ Р»Р°СЃРєР°...', 0x00FA9A)
+	        sampAddChatMessage('[AdHelper] Зачекайте, будь ласка...', 0x00FA9A)
 		    wait(1500)
-	        sampAddChatMessage('[AdHelper] Р›РѕРіРё СѓСЃРїС–С€РЅРѕ РѕС‡РёС‰РµРЅРѕ!', 0x00FA9A)
+	        sampAddChatMessage('[AdHelper] Логи успішно очищено!', 0x00FA9A)
 	        end)
 		
 		end
-		imgui.Checkbox(u8"РђРІС‚РѕРѕС‡РёС‰РµРЅРЅСЏ", checked_clean)
+		imgui.Checkbox(u8"Автоочищення", checked_clean)
 		if checked_clean.v then
             local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\clean1.txt', 'w')
 	        if file then
@@ -1507,7 +1509,7 @@ function imgui.OnDrawFrame()
 		
 		imgui.SetCursorPosY((sh/2)/1.13)
 		imgui.SetCursorPosX((sw/2)/1.07)
-		if imgui.Button(u8"Р’РёР№С‚Рё") then
+		if imgui.Button(u8"Вийти") then
 		    fourth_window_state.v = false
 			main_window_state.v = true
 		    local file = io.open(getGameDirectory()..'\\moonloader\\AdHelper\\password.txt', 'w')
@@ -1522,7 +1524,7 @@ function imgui.OnDrawFrame()
 		imgui.SetCursorPosY((sh/2)/1.06)
 		imgui.Separator()
 		
-		imgui.Text("by Budanov | Version "..script__version..u8" | РЎР»Р°РІР° РЈРєСЂР°С—РЅС–!")
+		imgui.Text("by Budanov | Version "..script__version..u8" | Слава Україні!")
 		
 		
 	    imgui.End()
@@ -1532,19 +1534,19 @@ function imgui.OnDrawFrame()
 	    imgui.Process = fifth_window_state.v
 		imgui.SetNextWindowPos(imgui.ImVec2(sw/ 6 , sh / 2 ), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 		imgui.SetNextWindowSize(imgui.ImVec2(sw/5, sh/5), imgui.Cond.FirstUseEver)
-		imgui.Begin(u8"[AdHelper] | Р§РѕСЂРЅРёР№ СЃРїРёСЃРѕРє", fifth_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
-		imgui.InputText(u8"Р’РІРµРґС–С‚СЊ РЅС–Рє", text_buffer5)
+		imgui.Begin(u8"[AdHelper] | Чорний список", fifth_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+		imgui.InputText(u8"Введіть нік", text_buffer5)
 		if imgui.IsItemHovered() then
             imgui.BeginTooltip()
-            imgui.Text(u8' Р’РІРµРґС–С‚СЊ РЅС–Рє РіСЂР°РІС†СЏ, \n С‰РѕР± РїРµСЂРµРІС–СЂРёС‚Рё Р№РѕРіРѕ РЅР° РЅР°СЏРІРЅС–СЃС‚СЊ Сѓ Р§РЎ.')
+            imgui.Text(u8' Введіть нік гравця, \n щоб перевірити його на наявність у ЧС.')
             imgui.EndTooltip()
         end
 		if state_inp then
 		    imgui.PushItemWidth(50)
-		    imgui.InputText(u8"Р’РІРµРґС–С‚СЊ id", text_buffer9)
+		    imgui.InputText(u8"Введіть id", text_buffer9)
 			if imgui.IsItemHovered() then
                 imgui.BeginTooltip()
-                imgui.Text(u8' Р’РІРµРґС–С‚СЊ ID РіСЂР°РІС†СЏ, \n СЏРєС‰Рѕ РІС–РЅ РІ РіСЂС–, С‰РѕР± \n РїРµСЂРµРІС–СЂРёС‚Рё Р№РѕРіРѕ РЅР° РЅР°СЏРІРЅС–СЃС‚СЊ Сѓ Р§РЎ.')
+                imgui.Text(u8' Введіть ID гравця, \n якщо він в грі, щоб \n перевірити його на наявність у ЧС.')
                 imgui.EndTooltip()
             end
 		end
@@ -1556,32 +1558,32 @@ function imgui.OnDrawFrame()
 			text_buffer9.v = ""
 		end
 		nick2 = sampGetPlayerNickname(text_buffer9.v)
-		if imgui.Button(u8"РџРµСЂРµРІС–СЂРёС‚Рё") then
+		if imgui.Button(u8"Перевірити") then
 			    
 		    if text_buffer9.v == "" and text_buffer5.v ~= "" then 
 		        if string.find(text_buffer5.v, bls) then
 				    if string.find(text_buffer8.v, text_buffer5.v) then
-				        sampAddChatMessage("[AdHelper] Р¦РµР№ РіСЂР°РІРµС†СЊ С” Сѓ СЃРїРёСЃРєСѓ!", 0xFF0000)
+				        sampAddChatMessage("[AdHelper] Цей гравець є у списку!", 0xFF0000)
 				    else
-				        sampAddChatMessage("[AdHelper] Р¦СЊРѕРіРѕ РіСЂР°РІС†СЏ РЅРµРјР°С” Сѓ СЃРїРёСЃРєСѓ!", 0x00FF00)
+				        sampAddChatMessage("[AdHelper] Цього гравця немає у списку!", 0x00FF00)
 				    end
 			    else
-			    sampAddChatMessage("[AdHelper] РќС–Рє РїРѕРІРёРЅРµРЅ РјР°С‚Рё С‚Р°РєСѓ С„РѕСЂРјСѓ: 'Nick_Nick'!", 0x00FA9A)
+			    sampAddChatMessage("[AdHelper] Нік повинен мати таку форму: 'Nick_Nick'!", 0x00FA9A)
 			    end
 			end
 			if text_buffer9.v ~= "" and text_buffer5.v == "" then
 			    if tonumber(text_buffer9.v) then
 				    if string.find(text_buffer8.v, nick2) then
-				        sampAddChatMessage("[AdHelper] "..nick2.." С” Сѓ СЃРїРёСЃРєСѓ!", 0xFF0000)
+				        sampAddChatMessage("[AdHelper] "..nick2.." є у списку!", 0xFF0000)
 				    else
-				        sampAddChatMessage("[AdHelper] "..nick2.." РЅРµРјР°С” Сѓ СЃРїРёСЃРєСѓ!", 0x00FF00)
+				        sampAddChatMessage("[AdHelper] "..nick2.." немає у списку!", 0x00FF00)
 				    end
 			    else
-			        sampAddChatMessage("[AdHelper] ID РїРѕРІРёРЅРµРЅ Р±СѓС‚Рё РІ С‡РёСЃР»РѕРІРѕРјСѓ РІРёРіР»СЏРґС–!", 0x00FA9A)
+			        sampAddChatMessage("[AdHelper] ID повинен бути в числовому вигляді!", 0x00FA9A)
 			    end
 			end
 			if text_buffer9.v == "" and text_buffer5.v == "" then
-			    sampAddChatMessage("[AdHelper] Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРІРµРґС–С‚СЊ РЅС–Рє Р°Р±Рѕ ID", 0x00FA9A)
+			    sampAddChatMessage("[AdHelper] Будь ласка, введіть нік або ID", 0x00FA9A)
 			
 			end
 		    
@@ -1589,7 +1591,7 @@ function imgui.OnDrawFrame()
 		end
 		if imgui.IsItemHovered() then
             imgui.BeginTooltip()
-            imgui.Text(u8' РќР°С‚РёСЃРЅС–СЃС‚СЊ, С‰РѕР± РїРµСЂРµРІС–СЂРёС‚Рё \n РЅР°СЏРІРЅС–СЃС‚СЊ РіСЂР°РІС†СЏ Сѓ Р§РЎ.')
+            imgui.Text(u8' Натисність, щоб перевірити \n наявність гравця у ЧС.')
             imgui.EndTooltip()
         end
 		imgui.Separator()
@@ -1603,7 +1605,7 @@ function imgui.OnDrawFrame()
 		imgui.InputTextMultiline("", text_buffer8)
 		if imgui.IsItemHovered() then
             imgui.BeginTooltip()
-            imgui.Text(u8' Р¦Рµ РїРѕР»Рµ Р°РєС‚РёРІРЅРµ. \n РЎСЋРґРё РјРѕР¶РЅР° РІРїРёСЃСѓРІР°С‚Рё, \n Р° С‚Р°РєРѕР¶ РІРёРґР°Р»СЏС‚Рё РЅС–РєРё.')
+            imgui.Text(u8' Це поле активне. \n Сюди можна вписувати, \n а також видаляти ніки.')
             imgui.EndTooltip()
         end
 		local find2 = string.match(text_buffer8.v, text_buffer8.v)
@@ -1621,22 +1623,22 @@ function imgui.OnDrawFrame()
             file:close()
 		end
 		imgui.Separator()
-		imgui.InputTextWithHint(u8" ",u8"Р’РІРµРґС–С‚СЊ ID", text_buffer11)
+		imgui.InputTextWithHint(u8" ",u8"Введіть ID", text_buffer11)
 		if imgui.IsItemHovered() then
             imgui.BeginTooltip()
-            imgui.Text(u8' Р’РІРµРґС–С‚СЊ ID РіСЂР°РІС†СЏ, \n СЏРєРёР№ Р·Р°СЂР°Р· РѕРЅР»Р°Р№РЅ \n С‰РѕР± РґРѕРґР°С‚Рё Р№РѕРіРѕ РЅС–Рє.')
+            imgui.Text(u8' Введіть ID гравця, \n який зараз онлайн \n щоб додати його нік.')
             imgui.EndTooltip()
         end
-		if imgui.Button(u8" Р”РѕРґР°С‚Рё ") then
+		if imgui.Button(u8" Додати ") then
 		nick3 = sampGetPlayerNickname(text_buffer11.v)
 		    if text_buffer11.v == "" then	
-                sampAddChatMessage("[AdHelper] Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРІРµРґС–С‚СЊ ID", 0x00FA9A)
+                sampAddChatMessage("[AdHelper] Будь ласка, введіть ID", 0x00FA9A)
             else				
 			    if string.match(text_buffer8.v, nick3) then
-		            sampAddChatMessage("[AdHelper] "..nick3.." РІР¶Рµ С” РІ СЃРїРёСЃРєСѓ!", 0xFF0000)
+		            sampAddChatMessage("[AdHelper] "..nick3.." вже є в списку!", 0xFF0000)
 			
 			    else
-			        sampAddChatMessage("[AdHelper] "..nick3.." СѓСЃРїС–С€РЅРѕ РґРѕРґР°РЅРёР№", 0x00FF00)
+			        sampAddChatMessage("[AdHelper] "..nick3.." успішно доданий", 0x00FF00)
 			        text_buffer8.v = (b1..nick3.."\n")
 			    end
 			end
@@ -1651,21 +1653,21 @@ function imgui.OnDrawFrame()
 		imgui.SetNextWindowPos(imgui.ImVec2(sw/ 2 , sh / 2 ), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 		imgui.SetNextWindowSize(imgui.ImVec2(sw/10, sh/5), imgui.Cond.FirstUseEver)
 		imgui.Begin(u8"[AdHelper] | Kick", sixth_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
-		imgui.Checkbox(u8"Р”РѕР±Р°РІРёС‚Рё Сѓ Р§РЎ", checked_kick)
-	    imgui.Text(u8"ID РіСЂР°РІС†СЏ: ")
+		imgui.Checkbox(u8"Добавити у ЧС", checked_kick)
+	    imgui.Text(u8"ID гравця: ")
 		imgui.PushItemWidth(50)
 		imgui.InputText(" ",text_buffer12)
 		if imgui.IsItemHovered() then
             imgui.BeginTooltip()
-            imgui.Text(u8' Р’РІРµРґС–С‚СЊ ID РіСЂР°РІС†СЏ, \n СЏРєРѕРіРѕ С…РѕС‡РµС‚Рµ РєС–РєРЅСѓС‚Рё.')
+            imgui.Text(u8' Введіть ID гравця, \n якого хочете кікнути.')
             imgui.EndTooltip()
         end
-		imgui.Text(u8"РџСЂРёС‡РёРЅР°: ")
+		imgui.Text(u8"Причина: ")
 		imgui.PushItemWidth(120)
-		imgui.InputTextWithHint("  ",u8"Р’РІРµРґС–С‚СЊ С‚РµРєСЃС‚",text_buffer13)
-		if imgui.Button(u8"РљС–РєРЅСѓС‚Рё") then
+		imgui.InputTextWithHint("  ",u8"Введіть текст",text_buffer13)
+		if imgui.Button(u8"Кікнути") then
 		    if text_buffer12.v == "" or text_buffer13.v == "" then
-			    sampAddChatMessage("[AdHelper] РџРѕР»СЏ РЅРµ РјРѕР¶СѓС‚СЊ Р±СѓС‚Рё РїСѓСЃС‚РёРјРё!", 0xFF0000)
+			    sampAddChatMessage("[AdHelper] Поля не можуть бути пустими!", 0xFF0000)
 				
 			else
 			    if checked_kick.v then
@@ -1683,7 +1685,7 @@ function imgui.OnDrawFrame()
 					    imgui.Process = sixth_window_state.v
 					    sixth_window_state.v = false
 				    else
-				        sampAddChatMessage("РџРѕР»Рµ ID РїРѕРІРёРЅРЅРѕ РјР°С‚Рё С‡РёСЃР»РѕРІРёР№ РІРёРіР»СЏРґ!", -1)
+				        sampAddChatMessage("Поле ID повинно мати числовий вигляд!", -1)
 				    end
 				else 
 				    sampSendChat("/famuninvite "..text_buffer12.v.." "..u8:decode(text_buffer13.v))
@@ -1781,21 +1783,21 @@ function autoupdate(json_url, prefix, url)
               lua_thread.create(function(prefix)
                 local dlstatus = require('moonloader').download_status
                 local color = -1
-                sampAddChatMessage((prefix..'РћР±РЅР°СЂСѓР¶РµРЅРѕ РѕР±РЅРѕРІР»РµРЅРёРµ. РџС‹С‚Р°СЋСЃСЊ РѕР±РЅРѕРІРёС‚СЊСЃСЏ c '..thisScript().version..' РЅР° '..updateversion), color)
+                sampAddChatMessage((prefix..'Обнаружено обновление. Пытаюсь обновиться c '..thisScript().version..' на '..updateversion), color)
                 wait(250)
                 downloadUrlToFile(updatelink, thisScript().path,
                   function(id3, status1, p13, p23)
                     if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
-                      print(string.format('Р—Р°РіСЂСѓР¶РµРЅРѕ %d РёР· %d.', p13, p23))
+                      print(string.format('Загружено %d из %d.', p13, p23))
                     elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
-                      print('Р—Р°РіСЂСѓР·РєР° РѕР±РЅРѕРІР»РµРЅРёСЏ Р·Р°РІРµСЂС€РµРЅР°.')
-                      sampAddChatMessage((prefix..'РћР±РЅРѕРІР»РµРЅРёРµ Р·Р°РІРµСЂС€РµРЅРѕ!'), color)
+                      print('Загрузка обновления завершена.')
+                      sampAddChatMessage((prefix..'Обновление завершено!'), color)
                       goupdatestatus = true
                       lua_thread.create(function() wait(500) thisScript():reload() end)
                     end
                     if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
                       if goupdatestatus == nil then
-                        sampAddChatMessage((prefix..'РћР±РЅРѕРІР»РµРЅРёРµ РїСЂРѕС€Р»Рѕ РЅРµСѓРґР°С‡РЅРѕ. Р—Р°РїСѓСЃРєР°СЋ СѓСЃС‚Р°СЂРµРІС€СѓСЋ РІРµСЂСЃРёСЋ..'), color)
+                        sampAddChatMessage((prefix..'Обновление прошло неудачно. Запускаю устаревшую версию..'), color)
                         update = false
                       end
                     end
@@ -1805,11 +1807,11 @@ function autoupdate(json_url, prefix, url)
               )
             else
               update = false
-              print('v'..thisScript().version..': РћР±РЅРѕРІР»РµРЅРёРµ РЅРµ С‚СЂРµР±СѓРµС‚СЃСЏ.')
+              print('v'..thisScript().version..': Обновление не требуется.')
             end
           end
         else
-          print('v'..thisScript().version..': РќРµ РјРѕРіСѓ РїСЂРѕРІРµСЂРёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ. РЎРјРёСЂРёС‚РµСЃСЊ РёР»Рё РїСЂРѕРІРµСЂСЊС‚Рµ СЃР°РјРѕСЃС‚РѕСЏС‚РµР»СЊРЅРѕ РЅР° '..url)
+          print('v'..thisScript().version..': Не могу проверить обновление. Смиритесь или проверьте самостоятельно на '..url)
           update = false
         end
       end
