@@ -1,6 +1,6 @@
 script_author('Budanov for Banderas Family')
 script_name("adHelper")
-local script__version = '1.2'
+local script__version = '1.3'
 script_version(script__version)
 local keys = require "vkeys"
 script_description('Підрахунок к-ті оголошень в ЗМІ та інвайтів')
